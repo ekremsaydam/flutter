@@ -58,16 +58,7 @@ class HelloWorld extends StatelessWidget {
         appBar: AppBar(
           title: Text("My First Custom Widget"),
         ),
-        body: Material(
-          color: Colors.red,
-          child: Center(
-            child: Text(
-              "Hello World",
-              textDirection: TextDirection.ltr,
-              style: TextStyle(color: Colors.black, fontSize: 50.0),
-            ),
-          ),
-        ),
+        body: MainPage(),
       ),
     );
   }
@@ -75,4 +66,20 @@ class HelloWorld extends StatelessWidget {
 
 void main() {
   runApp(HelloWorld());
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.red,
+      child: Center(
+        child: Text(
+          "Hello World",
+          textDirection: TextDirection.ltr,
+          style: TextStyle(color: Colors.black, fontSize: 50.0),
+        ),
+      ),
+    );
+  }
 }
