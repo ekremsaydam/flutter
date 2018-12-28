@@ -6,11 +6,24 @@ class Home extends StatelessWidget {
     return Center(
         child: Container(
       alignment: Alignment.topLeft,
-      margin: EdgeInsets.only(left: 50.0,top: 50.0),
+      //margin: EdgeInsets.only(left: 50.0, top: 50.0),
+      margin: EdgeInsets.only(top: 30.0),
       color: Colors.red,
-      child: Text(
-        "Asus Laptop",
+      child: Row(
         textDirection: TextDirection.ltr,
+        children: <Widget>[
+          Text(
+            "Asus Laptop",
+            textDirection: TextDirection.ltr,
+            style: TextStyle(fontSize: 20.0),
+          ),
+          Expanded(
+              child: Text(
+            "16Gb Ram, 128 Gb SSD, Intel i7",
+            textDirection: TextDirection.ltr,
+            style: TextStyle(fontSize: 20.0),
+          )),
+        ],
       ),
     ));
   }
