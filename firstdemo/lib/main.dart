@@ -75,11 +75,23 @@ class MainPage extends StatelessWidget {
       color: Colors.red,
       child: Center(
         child: Text(
-          "Hello World",
+          "Merhaba dünya, " + selamVer(),
           textDirection: TextDirection.ltr,
           style: TextStyle(color: Colors.black, fontSize: 50.0),
         ),
       ),
     );
+  }
+}
+
+String selamVer() {
+  DateTime now = new DateTime.now();
+  int hour = now.hour + 3;
+  if (hour <= 12) {
+    return "Günaydın!.";
+  } else if (hour <= 18) {
+    return "İyi Günler!.";
+  } else {
+    return "İyi akşamlar.";
   }
 }
