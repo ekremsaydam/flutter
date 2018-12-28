@@ -17,13 +17,13 @@ class Home extends StatelessWidget {
               Text(
                 "Asus Laptop",
                 textDirection: TextDirection.ltr,
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(color: Colors.white, fontSize: 20.0,decoration: TextDecoration.none),
               ),
               Expanded(
                   child: Text(
                 "16Gb Ram, 128 Gb SSD, Intel i7",
                 textDirection: TextDirection.ltr,
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(color: Colors.white, fontSize: 20.0,decoration: TextDecoration.none),
               )),
             ],
           ),
@@ -33,13 +33,13 @@ class Home extends StatelessWidget {
               Text(
                 "HP Laptop",
                 textDirection: TextDirection.ltr,
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(color: Colors.white, fontSize: 20.0,decoration: TextDecoration.none),
               ),
               Expanded(
                   child: Text(
                 "32Gb Ram, 512 Gb SSD, Intel i7",
                 textDirection: TextDirection.ltr,
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(color: Colors.white, fontSize: 20.0,decoration: TextDecoration.none),
               )),
             ],
           ),
@@ -61,10 +61,23 @@ class OrderButton extends StatelessWidget {
       child: RaisedButton(
         elevation: 5.0,
         child: Text("Go to checkout"),
-        onPressed: () {},
+        onPressed: () {
+          order(context);
+        },
       ),
     );
 
     return button;
+  }
+
+  order(BuildContext context) {
+    var alert = AlertDialog(
+      title: Text("Go to Check Out"),
+      content: Text("I will check Out"),
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context)=>alert,
+    );
   }
 }
