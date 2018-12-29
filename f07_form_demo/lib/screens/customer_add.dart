@@ -6,11 +6,13 @@ class CustomerAdd extends StatefulWidget {
 }
 
 class CustomerAddState extends State {
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(25.0),
       child: Form(
+        key: formKey,
         child: Column(
           children: <Widget>[
             firstNameField(),
@@ -60,7 +62,7 @@ class CustomerAddState extends State {
     return RaisedButton(
       child: Text("Kaydet"),
       onPressed: () {
-        form
+        formKey.currentState.validate();
       },
     );
   }
