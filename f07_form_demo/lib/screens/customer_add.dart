@@ -1,3 +1,5 @@
+import 'package:f07_form_demo/mixins/validation_mixin.dart';
+import 'package:f07_form_demo/models/Customer.dart';
 import 'package:flutter/material.dart';
 
 class CustomerAdd extends StatefulWidget {
@@ -5,8 +7,9 @@ class CustomerAdd extends StatefulWidget {
   State<StatefulWidget> createState() => CustomerAddState();
 }
 
-class CustomerAddState extends State {
+class CustomerAddState extends State with ValidationMixin {
   final formKey = GlobalKey<FormState>();
+  final customer = new Customer();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,10 +32,9 @@ class CustomerAddState extends State {
   Widget firstNameField() {
     return TextFormField(
       decoration: InputDecoration(labelText: "First Name", hintText: "Zeki"),
-      validator: (String value) {
-        if (value.length < 2) {
-          return "İsim en az 2 karakter olmalıdır.";
-        }
+      validator: validateFirstName,
+      onSaved: (String value) {
+        customer.firstName = value;
       },
     );
   }
@@ -40,6 +42,10 @@ class CustomerAddState extends State {
   Widget lastNameField() {
     return TextFormField(
       decoration: InputDecoration(labelText: "Last Name", hintText: "KOŞAR"),
+      validator: validateLastName,
+      onSaved: (String value) {
+        customer.lastName = value;
+      },
     );
   }
 
@@ -48,6 +54,10 @@ class CustomerAddState extends State {
       keyboardType: TextInputType.emailAddress,
       decoration:
           InputDecoration(labelText: "Email", hintText: "mail@mail.com"),
+      validator: validateEmail,
+      onSaved: (String value) {
+        customer.email = value;
+      },
     );
   }
 
@@ -55,6 +65,9 @@ class CustomerAddState extends State {
     return TextFormField(
       obscureText: true,
       decoration: InputDecoration(labelText: "Password", hintText: "password"),
+      onSaved: (String value) {
+        customer.password = value;
+      },
     );
   }
 
@@ -62,8 +75,15 @@ class CustomerAddState extends State {
     return RaisedButton(
       child: Text("Kaydet"),
       onPressed: () {
-        formKey.currentState.validate();
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save();
+          saveCustomer(customer);
+        }
       },
     );
+  }
+
+  void saveCustomer(Customer customer) {
+    print(customer.firstName);
   }
 }
