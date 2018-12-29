@@ -15,6 +15,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite: any
+  path_provider: any # veritabanının ios ve androidde farklı pathlerde olmasından kaynaklı sorunları engellemek amaçlı kullanılır.
+  intl: ^0.15.7
+  # farklı dillerde kullanılan mobil cihazlar sorun yaşamamak adına kullanılır.
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
