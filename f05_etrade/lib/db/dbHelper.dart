@@ -29,5 +29,19 @@ class DbHelper {
     return _db;
   }
 
-  initializeDb() {}
+  Future<Database> initializeDb() async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    String path = directory.path + "etrade.db";
+
+    var dbEtrade = await openDatabase(path, version: 1, onCreate: _createDb);
+
+    return dbEtrade;
+  }
+
+  void _createDb(Database db, int version) async {
+    await db.execute(
+        "Create table $tblProduct($colId integer primary key, $colName text, $colDescription text, $colPrice integer)");
+    
+    
+  }
 }
