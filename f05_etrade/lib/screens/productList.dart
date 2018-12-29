@@ -1,5 +1,6 @@
 import 'package:f05_etrade/db/dbHelper.dart';
 import 'package:f05_etrade/models/product.dart';
+import 'package:f05_etrade/screens/productDetail.dart';
 import 'package:flutter/material.dart';
 
 class ProductList extends StatefulWidget {
@@ -40,7 +41,7 @@ class ProductListState extends State {
             title: Text(this.products[position].name),
             subtitle: Text(this.products[position].description),
             onTap: () {
-
+              GoToDetail(this.products[position]);
             },
           ),
         );
@@ -64,5 +65,10 @@ class ProductListState extends State {
         });
       });
     });
+  }
+
+  void GoToDetail(Product product) async {
+    await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ProductDetail(product)));
   }
 }
