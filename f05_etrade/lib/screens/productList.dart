@@ -1,5 +1,6 @@
 import 'package:f05_etrade/db/dbHelper.dart';
 import 'package:f05_etrade/models/product.dart';
+import 'package:f05_etrade/screens/productAdd.dart';
 import 'package:f05_etrade/screens/productDetail.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,13 @@ class ProductListState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       body: productListItems(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          gotoProductAdd();
+        },
+        tooltip: "add new product",
+        child: Icon(Icons.add),
+      ),
     );
   }
 
@@ -41,7 +49,7 @@ class ProductListState extends State {
             title: Text(this.products[position].name),
             subtitle: Text(this.products[position].description),
             onTap: () {
-              GoToDetail(this.products[position]);
+              goToDetail(this.products[position]);
             },
           ),
         );
@@ -67,8 +75,21 @@ class ProductListState extends State {
     });
   }
 
-  void GoToDetail(Product product) async {
-    await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ProductDetail(product)));
+  void goToDetail(Product product) async {
+    bool result = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ProductDetail(product)));
+
+    if (result != null && result == true) {
+      getData();
+    }
+  }
+
+  void gotoProductAdd() async {
+    bool result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ProductAdd()));
+
+    if (result != null && result == true) {
+      getData();
+    }
   }
 }
