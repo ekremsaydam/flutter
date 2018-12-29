@@ -41,7 +41,35 @@ class DbHelper {
   void _createDb(Database db, int version) async {
     await db.execute(
         "Create table $tblProduct($colId integer primary key, $colName text, $colDescription text, $colPrice integer)");
-    
-    
+
+    Future<int> insert(Product product) async {
+      Database db = await this.db;
+
+      var result = await db.insert(tblProduct, product.toMap());
+
+      return result;
+    }
+
+    Future<int> update(Product product) async {
+      Database db = await this.db;
+      var result = await db.update(tblProduct, product.toMap(),
+          where: "$colId = ?", whereArgs: [product.id]);
+
+      return result;
+    }
+
+    Future<int> delete(int id) async {
+      Database db = await this.db;
+      var result =
+          await db.rawDelete("delete from $tblProduct where $colId = $id");
+      return result;
+    }
+
+    Future<List> getProducts() async {
+      Database db = await this.db;
+      var result = await db.rawQuery("select * from $tblProduct");
+
+      return result;
+    }
   }
 }
