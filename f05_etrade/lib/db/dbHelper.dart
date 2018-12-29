@@ -22,7 +22,7 @@ class DbHelper {
   static Database _db; // sqflite
 
   Future<Database> get db async {
-    if (_db != null) {
+    if (_db == null) {
       _db = await initializeDb();
     }
 
@@ -41,8 +41,9 @@ class DbHelper {
   void _createDb(Database db, int version) async {
     await db.execute(
         "Create table $tblProduct($colId integer primary key, $colName text, $colDescription text, $colPrice integer)");
+  }
 
-    Future<int> insert(Product product) async {
+  Future<int> insert(Product product) async {
       Database db = await this.db;
 
       var result = await db.insert(tblProduct, product.toMap());
@@ -71,5 +72,4 @@ class DbHelper {
 
       return result;
     }
-  }
 }

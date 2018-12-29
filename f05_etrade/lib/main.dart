@@ -1,3 +1,5 @@
+import 'package:f05_etrade/db/dbHelper.dart';
+import 'package:f05_etrade/models/product.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -6,6 +8,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    List<Product> products = new List<Product>();
+    DbHelper dbHelper = new DbHelper();
+    dbHelper.initializeDb().then(
+        (result) => dbHelper.getProducts().then((result) => products = result));
+
+    Product product = new Product("Mouse", "A4 Tech wireless Mouse", 30);
+    dbHelper.insert(product);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
